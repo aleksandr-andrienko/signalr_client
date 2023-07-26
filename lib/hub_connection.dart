@@ -156,6 +156,7 @@ class HubConnection {
   /// Returns a Promise that resolves when the connection has been successfully established, or rejects with an error.
   ///
   Future<void>? start() async {
+    _logger?.finer("Start Connection. ConnectionState '$_connectionState'");
     _startPromise = _startWithStateTransitions();
     return _startPromise;
   }
