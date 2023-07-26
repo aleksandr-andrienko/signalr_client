@@ -1,3 +1,6 @@
+## Next
+* Fix invalid type cast in WebSupportingHttpClient
+
 ## [1.3.5]
 
 * Upgrade packages and remove warnings
