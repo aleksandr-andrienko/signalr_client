@@ -13,7 +13,7 @@ dependencies:
   logging: ^1.2.0
   tuple: ^2.0.2
   web_socket_channel: ^2.4.0
-  sse_channel: ^0.0.3
+  sse_client: ^0.1.0
   message_pack_dart: ^2.0.1
   http: ^0.13.6
 
