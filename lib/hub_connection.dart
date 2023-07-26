@@ -333,7 +333,8 @@ class HubConnection {
         // invocationEvent will not be null when an error is not passed to the callback
         if (invocationEvent is CompletionMessage) {
           if (invocationEvent.error != null) {
-            streamController.addError(GeneralError(invocationEvent.error));
+            streamController.addError(
+                GeneralError(invocationEvent.error ?? 'invocationEvent.error'));
           } else {
             streamController.close();
           }
@@ -411,7 +412,8 @@ class HubConnection {
         if (invocationEvent is CompletionMessage) {
           if (invocationEvent.error != null) {
             if (!completer.isCompleted) {
-              completer.completeError(new GeneralError(invocationEvent.error));
+              completer.completeError(new GeneralError(
+                  invocationEvent.error ?? 'invocationEvent.error'));
             }
           } else {
             if (!completer.isCompleted) {
