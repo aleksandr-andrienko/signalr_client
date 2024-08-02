@@ -1,4 +1,4 @@
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -19,14 +19,6 @@ namespace SignalRChatServer
     public void ConfigureServices(IServiceCollection services)
     {
       services.AddSignalR();
-      services.AddCors(options => options.AddPolicy("CorsPolicy",
-        builder =>
-        {
-          builder.AllowAnyHeader()
-                  .AllowAnyMethod()
-                  .SetIsOriginAllowed((host) => true)
-                  .AllowCredentials();
-        }));
     }
 
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -46,7 +38,6 @@ namespace SignalRChatServer
       app.UseDefaultFiles();
       app.UseStaticFiles();
       app.UseCookiePolicy();
-      app.UseCors("CorsPolicy");
 
       app.UseRouting();
 
