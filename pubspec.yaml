@@ -14,7 +14,9 @@ dependencies:
   logging: ^1.2.0
   tuple: ^2.0.2
   web_socket_channel: ^3.0.0
-  sse_channel: ^0.1.1
+  #sse_channel: ^0.1.1
+  sse_channel:
+    git: https://github.com/aleksandr-andrienko/sse_channel.git
   message_pack_dart: ^2.0.1
   http: ^1.1.0
 
