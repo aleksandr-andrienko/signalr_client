@@ -3,7 +3,7 @@ description: A flutter client for ASP.NET Core SignalR. The client is able to in
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 
 version: 1.3.9
-homepage: https://github.com/aleksandr-andrienko/signalr_client
+homepage: https://github.com/C4BAG/signalr_client
 
 environment:
   sdk: ">=2.12.0 <4.0.0"
@@ -17,7 +17,7 @@ dependencies:
   web_socket_channel: ^3.0.0
   #sse_channel: ^0.1.1
   sse_channel:
-    git: https://github.com/aleksandr-andrienko/sse_channel.git
+    git: https://github.com/C4BAG/sse_channel.git
   message_pack_dart: ^2.0.1
   http: ^1.1.0
 
