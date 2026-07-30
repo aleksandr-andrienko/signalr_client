@@ -16,6 +16,7 @@ class ServerSentEventsTransport implements ITransport {
   final Logger? _logger;
   final bool _logMessageContent;
   SseChannel? _sseClient;
+  StreamSubscription? _sseSubscription;
   String? _url;
 
   @override
@@ -69,7 +70,7 @@ class ServerSentEventsTransport implements ITransport {
       return Future.error(e);
     }
 
-    _sseClient!.stream.listen((data) {
+    _sseSubscription = _sseClient!.stream.listen((data) {
       if (onReceive != null) {
         try {
           _logger?.finest(
@@ -113,7 +114,20 @@ class ServerSentEventsTransport implements ITransport {
 
   _close({dynamic error}) {
     if (_sseClient != null) {
+      final client = _sseClient;
       _sseClient = null;
+
+      // Bug 18056: tear down the event stream for real. Only nulling the
+      // reference left the underlying HTTP GET socket ESTABLISHED forever
+      // when the local network interface disappeared (dropped VPN tunnel).
+      _sseSubscription?.cancel();
+      _sseSubscription = null;
+      try {
+        client?.close();
+      } catch (e) {
+        // Closing a dead transport must never throw into the close path.
+        _logger?.finer('(SSE transport) error while closing channel: $e');
+      }
 
       if (onClose != null) {
         Exception ex = (error is Exception)
